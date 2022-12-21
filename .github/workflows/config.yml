@@ -1,0 +1,68 @@
+name: Github CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:18.12.1-alpine3.15
+
+    strategy:
+      matrix:
+        database-name:
+          - bigdodo-db
+        database-user:
+          - username
+        database-password:
+          - password
+        database-host:
+          - postgres
+        database-port:
+          - 5432
+        node-version:
+          - 18
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ matrix.database-name }}
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+        ports:
+          - ${{ matrix.database-port }}:${{ matrix.database-port }}
+        # Set health checks to wait until postgres has started
+        options: --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Github checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npm run lint
+
+      - run: npm test
+
+      - run: npm run test:e2e
+        env:
+          DATABASE_USERNAME: ${{ matrix.database-user }}
+          DATABASE_PASSWORD: ${{ matrix.database-password }}
+          DATABASE_HOSTNAME: ${{ matrix.database-host }}
+          DATABASE_PORT: ${{ matrix.database-port }}
+          DATABASE_NAME: ${{ matrix.database-name }}
+
+      - run: npm audit
