@@ -24,6 +24,8 @@ export class UsersRepository extends Repository<UsersEntity> {
   async createUser(newUser: CreateUserDto) {
     const user = new UsersEntity();
     user.email = newUser.email;
+    user.firstName = newUser.firstname;
+    user.lastName = newUser.lastname;
     await this.save(user);
   }
 }

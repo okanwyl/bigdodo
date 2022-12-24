@@ -6,6 +6,7 @@ export class AddUsers1669834539569 implements MigrationInterface {
     await queryRunner.manager.insert(UsersEntity, [
       {
         firstName: 'tester',
+        email: 'asdasd@gmail.com',
       },
     ]);
   }
