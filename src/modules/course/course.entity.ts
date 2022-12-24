@@ -1,14 +1,18 @@
+import { Exclude, Expose } from 'class-transformer';
+import { LessonEntity } from 'modules/lesson/lesson.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   Generated,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'courses' })
 export class CourseEntity {
+  @Exclude({ toPlainOnly: true })
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
@@ -24,6 +28,9 @@ export class CourseEntity {
 
   @Column({ name: 'course_description' })
   public description: string;
+
+  @OneToMany((type) => LessonEntity, (lesson) => lesson.course, { eager: true })
+  public lessons: LessonEntity[];
 
   @CreateDateColumn({
     type: 'timestamp',

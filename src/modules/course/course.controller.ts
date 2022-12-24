@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateLessonDto } from 'modules/lesson/create-lesson.dto';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './create-course.dto';
 
@@ -26,10 +27,13 @@ export class CourseController {
     return this.courseService.createCourse(newCourse);
   }
 
+  @Post('/s/:slug')
+  async createLessonOnCourse(
+    @Param('slug') slug: string,
+    @Body() newLesson: CreateLessonDto,
+  ) {
+    return this.courseService.addLessonToCourse(newLesson, slug);
+  }
+
   // @TODO Put method for update purpose
 }
-//   @Put(':id')
-//   async updateUser(@Param('id') id: string, @Body() updateUser: CreateUserDto) {
-//     return this.userService.updateUser(id, updateUser);
-//   }
-// }

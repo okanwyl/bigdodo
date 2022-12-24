@@ -15,7 +15,7 @@ const config = new DataSource({
   ],
   migrationsTableName: 'seeders',
   logging: true,
-  synchronize: false, // @TODO not in production
+  synchronize: false, 
 });
 
 export default config;

@@ -11,7 +11,8 @@ export class newEntitiy1671875609713 implements MigrationInterface {
           Aenean interdum semper nibh ac rutrum. 
           Nam mollis leo a magna consequat mattis. Maecenas malesuada sagittis lacus, 
           quis accumsan diam venenatis nec. Phasellus dui sem, aliquam vel sagittis sit amet, luctus `,
-          slug: 'course-1'
+        slug: 'course-1',
+        lessons: [],
       },
     ]);
   }
