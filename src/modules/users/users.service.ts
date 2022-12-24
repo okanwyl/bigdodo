@@ -21,13 +21,13 @@ export class UsersService {
     return foundUser;
   }
 
-  // @FIXME that need to changed
+  // @FIXME #2 Delete in last commit
   async getAll() {
-    return this.userRepository.getAll();
+    return await this.userRepository.getAll();
   }
 
   async findByEmail(email: string): Promise<UsersEntity | null> {
-    return this.userRepository.getByEmail(email);
+    return await this.userRepository.getByEmail(email);
   }
 
   @Transactional()
@@ -42,7 +42,7 @@ export class UsersService {
     return this.userRepository.createUser(newUser);
   }
 
-  // @TODO Fix that when auth is implemented and clean the code
+  // @TODO #1 Fix that when auth is implemented and clean the code
   async updateUser(
     id: string,
     updateRequest: CreateUserDto,
@@ -74,6 +74,6 @@ export class UsersService {
         throw new ConflictException();
       }
     }
-    return this.userRepository.getById(id);
+    return await this.userRepository.getById(id);
   }
 }
