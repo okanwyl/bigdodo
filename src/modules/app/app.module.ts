@@ -15,6 +15,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from 'modules/roles/roles.guard';
 import { CourseModule } from 'modules/course/course.module';
 import { LessonModule } from 'modules/lesson/lesson.module';
+import { QuizModule } from 'modules/quiz/quiz.module';
 
 const typeOrmConfig = {
   imports: [
@@ -41,6 +42,7 @@ const typeOrmConfig = {
     UsersModule,
     CourseModule,
     LessonModule,
+    QuizModule,
   ],
   controllers: [AppController],
   providers: [

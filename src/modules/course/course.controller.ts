@@ -7,17 +7,12 @@ import { CreateCourseDto } from './create-course.dto';
 export class CourseController {
   constructor(private courseService: CourseService) {}
 
-  @Get(':id')
-  async getById(@Param('id') id: string) {
-    return this.courseService.findById(id);
-  }
-
   @Get()
   async getAll() {
     return this.courseService.getAll();
   }
 
-  @Get('/s/:slug')
+  @Get(':slug')
   async getBySlug(@Param('slug') slug: string) {
     return this.courseService.findBySlug(slug);
   }
@@ -27,7 +22,7 @@ export class CourseController {
     return this.courseService.createCourse(newCourse);
   }
 
-  @Post('/s/:slug')
+  @Post(':slug')
   async createLessonOnCourse(
     @Param('slug') slug: string,
     @Body() newLesson: CreateLessonDto,

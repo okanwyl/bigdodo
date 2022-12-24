@@ -4,9 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CreateLessonDto } from 'modules/lesson/create-lesson.dto';
-import { LessonEntity } from 'modules/lesson/lesson.entity';
 import { LessonRepository } from 'modules/lesson/lesson.repository';
-import { LessonService } from 'modules/lesson/lesson.service';
 import { Transactional } from 'typeorm-transactional';
 import { CourseEntity } from './course.entity';
 import { CourseRepository } from './course.repository';

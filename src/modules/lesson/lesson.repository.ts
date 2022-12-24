@@ -6,8 +6,8 @@ import { LessonEntity } from './lesson.entity';
 
 @Injectable()
 export class LessonRepository extends Repository<LessonEntity> {
-  constructor(private dataSoruce: DataSource) {
-    super(LessonEntity, dataSoruce.createEntityManager());
+  constructor(private dataSource: DataSource) {
+    super(LessonEntity, dataSource.createEntityManager());
   }
 
   async getByNo(no: number): Promise<LessonEntity | null> {

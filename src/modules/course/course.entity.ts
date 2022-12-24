@@ -1,4 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
+import { GradeLevel } from 'common/enums/grade.enum';
 import { LessonEntity } from 'modules/lesson/lesson.entity';
 import {
   Column,
@@ -28,6 +29,9 @@ export class CourseEntity {
 
   @Column({ name: 'course_description' })
   public description: string;
+
+  @Column({ type: 'enum', enum: GradeLevel, default: GradeLevel.A1 })
+  public gradeLevel: GradeLevel;
 
   @OneToMany((type) => LessonEntity, (lesson) => lesson.course, { eager: true })
   public lessons: LessonEntity[];

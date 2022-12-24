@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { GradeLevel } from '../../common/enums/grade.enum';
 
 @Entity({ name: 'users' })
 export class UsersEntity {
@@ -27,6 +28,9 @@ export class UsersEntity {
     default: Role.User,
   })
   public roles: Role;
+
+  @Column({ type: 'enum', enum: GradeLevel, default: GradeLevel.A1 })
+  public gradeLevel: GradeLevel;
 
   @CreateDateColumn({
     type: 'timestamp',
